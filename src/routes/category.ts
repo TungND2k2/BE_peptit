@@ -7,6 +7,8 @@ const routerCategory = Router();
 
 
 routerCategory.post("/", authenticateJWT, categoryController.create);
+routerCategory.patch("/:id", authenticateJWT, categoryController.update);
+routerCategory.delete("/:id", authenticateJWT, categoryController.deleteOne);
 routerCategory.get("/", categoryController.findMany);
 
 export default routerCategory;

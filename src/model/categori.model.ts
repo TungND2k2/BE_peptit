@@ -9,7 +9,6 @@ export class Category extends BaseEntity {
 
     @Column()
     name: string = ""; // Tiêu đề bài viết
-
 }
 
 

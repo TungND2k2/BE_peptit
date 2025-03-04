@@ -1,10 +1,19 @@
-import { ObjectIdColumn, ObjectId } from "typeorm";
+import { ObjectId } from "mongodb";
+import { ObjectIdColumn, CreateDateColumn, UpdateDateColumn, Column } from "typeorm";
 
 export abstract class BaseEntity {
-    createdAt: Date = new Date();
-    updatedAt: Date = new Date();
-    owner: any = '';
-    isDeleted: boolean = false;
-    @ObjectIdColumn() _id: ObjectId;
+    @ObjectIdColumn()
+    _id: ObjectId;
 
+    @CreateDateColumn() // Tự động lưu thời gian tạo
+    createdAt: Date;
+
+    @UpdateDateColumn() // Tự động lưu thời gian cập nhật
+    updatedAt: Date;
+
+    @Column({ default: "" })
+    owner: string = "";
+
+    @Column({ default: false })
+    isDeleted: boolean = false;
 }

@@ -7,6 +7,8 @@ const routerCatalog = Router();
 
 
 routerCatalog.post("/", authenticateJWT, catelogController.create);
+routerCatalog.patch("/:id", authenticateJWT, catelogController.update);
+routerCatalog.delete("/:id", authenticateJWT, catelogController.deleteOne);
 routerCatalog.get("/", catelogController.findMany);
 
 export default routerCatalog;
