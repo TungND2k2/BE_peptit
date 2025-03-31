@@ -20,7 +20,6 @@ const create = async (req: any, res: Response) => {
         catalog.owner = handler.id;
         const createCatalogResult = await catalogRepository.save(catalog);
         return sendResponse(res, 200, createCatalogResult)
-
     } catch (error) {
         console.log(error);
         return sendResponse(res, 500, "System Error")

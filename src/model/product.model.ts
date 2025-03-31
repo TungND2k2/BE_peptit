@@ -29,6 +29,9 @@ export class Product extends BaseEntity {
     idCategory: string; // Danh mục sản phẩm
 
     @Column()
+    images: []; // Danh mục sản phẩm
+
+    @Column()
     isActive: boolean; // Trạng thái sản phẩm (còn hoạt động hay không)
 
     @Column()
