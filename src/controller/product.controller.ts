@@ -53,8 +53,9 @@ const update = async (req: any, res: Response) => {
         product.title = body.title || product.title;
         product.idCategory = body.idCategory || product.idCategory;
         product.description = body.description || product.description;
-        product.stock = body.stock !== undefined ? body.stock : product.stock; // Dùng undefined để cho phép stock = 0
+        product.stock = body.stock !== undefined ? body.stock : product.stock;
         product.price = body.price !== undefined ? body.price : product.price;
+        product.attributes = body.attributes !== undefined ? body.attributes : product.attributes;
         // owner không thay đổi vì đã kiểm tra quyền ở trên
 
         // Lưu cập nhật vào cơ sở dữ liệu
