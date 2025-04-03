@@ -55,6 +55,7 @@ const update = async (req: any, res: Response) => {
         product.description = body.description || product.description;
         product.stock = body.stock !== undefined ? body.stock : product.stock;
         product.price = body.price !== undefined ? body.price : product.price;
+        product.images = body.images !== undefined ? body.images : product.images;
         product.attributes = body.attributes !== undefined ? body.attributes : product.attributes;
         // owner không thay đổi vì đã kiểm tra quyền ở trên
 
