@@ -1,27 +1,36 @@
 import { Controller } from "../enum/controller";
 import { BaseEntity } from "../enum/model.enum";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity(Controller.Blog)
 export class Blog extends BaseEntity {
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
     @Column()
-    title: string = ""; // Tiêu đề bài viết
+    title: string = "";
+
+    @Column({ nullable: true })
+    contentFileUrl: string | null = null; // URL or path to content file (e.g., Markdown, HTML)
 
     @Column()
-    content: string= ""; // Nội dung bài viết
+    author: string = "";
 
-    @Column()
-    author: string= ""; // Tên tác giả
+    @Column("simple-array", { nullable: true })
+    tags: string[] = [];
 
-    @Column()
-    tags: string= ""; // Thẻ (tags) của bài viết
+    @Column({ default: false })
+    isPublished: boolean = false;
 
-    @Column()
-    isPublished: boolean= false; // Trạng thái xuất bản (đã xuất bản hay chưa)
+    @Column({ type: "timestamp", nullable: true })
+    publishedAt: Date | null = null;
 
-    @Column()
-    publishedAt: Date=new Date(); // Ngày xuất bản (nếu có)
+    @Column({ nullable: true })
+    thumbnailUrl: string | null = null;
+
+    @Column("simple-array", { nullable: true })
+    imageUrls: string[] = [];
+
+    @Column({ default: false })
+    isDeleted: boolean = false;
 }
-
-

@@ -105,5 +105,28 @@ const findMany = async (req: any, res: Response) => {
     }
 }
 
+const findOne = async (req: any, res: Response) => {
+    try {
+        const handler = req.user;
+        const idCatalog = req.params.id; // Sửa lại từ `req.param.id` -> `req.params.id`
+        console.log(req.params)
+        if (!idCatalog) {
+            return sendResponse(res, 400, "Product ID is required");
+        }
 
-export default { create, findMany, update, deleteOne };
+        const catalog = await catalogRepository.findOneBy({ _id: new ObjectId(idCatalog), isDeleted: false });
+
+
+        if (!catalog) {
+            return sendResponse(res, 404, "Product not found");
+        }
+
+        return sendResponse(res, 200, catalog);
+
+    } catch (error) {
+        console.error(error);
+        return sendResponse(res, 500, "System Error");
+    }
+};
+
+export default { create, findMany, update, deleteOne, findOne };
