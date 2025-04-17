@@ -11,7 +11,7 @@ export class Blog extends BaseEntity {
     title: string = "";
 
     @Column({ nullable: true })
-    contentFileUrl: string | null = null; // URL or path to content file (e.g., Markdown, HTML)
+    content: string | null = null; // URL or path to content file (e.g., Markdown, HTML)
 
     @Column()
     author: string = "";
