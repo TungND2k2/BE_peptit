@@ -41,7 +41,7 @@ const update = async (req: any, res: Response) => {
         if (!blog) return sendResponse(res, 404, "Blog not found");
 
         blog.title = body.title ?? blog.title;
-        blog.contentFileUrl = body.content ?? blog.contentFileUrl;
+        blog.content = body.content ?? blog.content;
         blog.tags = body.tags ?? blog.tags;
         blog.thumbnailUrl = body.thumbnailUrl ?? blog.thumbnailUrl;
         blog.imageUrls = body.imageUrls ?? blog.imageUrls;
