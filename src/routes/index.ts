@@ -5,6 +5,7 @@ import routerProduct from './product';
 import routerAdmin from './admin';
 import routerCategory from './category';
 import routerCatalog from './catalog';
+import routerAccessory from './accessory';
 
 const router = Router();
 
@@ -13,4 +14,5 @@ router.use(`/${Controller.Blog}`, routerBlog);
 router.use(`/${Controller.Product}`, routerProduct);
 router.use(`/${Controller.Category}`, routerCategory);
 router.use(`/${Controller.Catalog}`, routerCatalog);
+router.use(`/${Controller.Accessory}`, routerAccessory);
 export default router;

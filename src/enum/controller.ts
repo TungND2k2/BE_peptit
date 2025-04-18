@@ -4,4 +4,5 @@ export enum Controller {
     Blog = "blogs",
     Category = "categories",
     Catalog = "catalogs",
+    Accessory = "accessories",
 }
