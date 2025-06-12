@@ -65,9 +65,9 @@ const deleteOne = async (req: any, res: Response) => {
             return sendResponse(res, 404, "Category not found");
         }
 
-        if (category.owner !== handler.id) {
-            return sendResponse(res, 403, "You are not authorized to delete this category");
-        }
+        // if (category.owner !== handler.id) {
+        //     return sendResponse(res, 403, "You are not authorized to delete this category");
+        // }
 
         category.isDeleted = true;
         await categoryRepository.save(category);
