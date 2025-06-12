@@ -75,9 +75,9 @@ const deleteOne = async (req: any, res: Response) => {
             return sendResponse(res, 404, "Catalog not found");
         }
 
-        if (catalog.owner !== handler.id) {
-            return sendResponse(res, 403, "You are not authorized to delete this catalog");
-        }
+        // if (catalog.owner !== handler.id) {
+        //     return sendResponse(res, 403, "You are not authorized to delete this catalog");
+        // }
 
         catalog.isDeleted = true;
         await catalogRepository.save(catalog);

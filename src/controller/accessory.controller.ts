@@ -80,9 +80,9 @@ const deleteOne = async (req: any, res: Response) => {
             return sendResponse(res, 404, "Accessory not found");
         }
 
-        if (accessory.owner !== handler.id) {
-            return sendResponse(res, 403, "You are not authorized to delete this accessory");
-        }
+        // if (accessory.owner !== handler.id) {
+        //     return sendResponse(res, 403, "You are not authorized to delete this accessory");
+        // }
 
         accessory.isDeleted = true;
         await accessoryRepository.save(accessory);
