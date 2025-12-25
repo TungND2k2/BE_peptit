@@ -5,4 +5,5 @@ export enum Controller {
     Category = "categories",
     Catalog = "catalogs",
     Accessory = "accessories",
+    Testimonial = "testimonials",
 }

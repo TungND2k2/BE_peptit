@@ -5,6 +5,7 @@ import { Blog } from '../model/blog.model';
 import { Category } from '../model/categori.model';
 import { Catalog } from '../model/catalog';
 import { Accessory } from '../model/accessory.model';
+import { Testimonial } from '../model/testimonial.model';
 
 // Tạo một DataSource mới với thông tin kết nối MongoDB 
 const AppDataSource = new DataSource({
@@ -12,7 +13,7 @@ const AppDataSource = new DataSource({
     url: process.env.MONGO_URI || "mongodb://ptt:123zXc_-@192.168.1.211:27017/ptt",  // URL kết nối MongoDB
     synchronize: true,  // Tự động đồng bộ hóa với các thay đổi entity
     logging: true,      // Kích hoạt logging trong quá trình thực thi
-    entities: [Admin, Product, Blog, Category, Catalog,Accessory] ,  // Các entity bạn đã định nghĩa
+    entities: [Admin, Product, Blog, Category, Catalog, Accessory, Testimonial] ,  // Các entity bạn đã định nghĩa
     useNewUrlParser: true,   // Được hỗ trợ trong TypeORM, nhưng không bắt buộc trong các phiên bản mới của Mongoose
     useUnifiedTopology: true, // Được hỗ trợ trong TypeORM, nhưng không bắt buộc trong các phiên bản mới của Mongoose
 });
