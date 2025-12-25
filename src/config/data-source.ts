@@ -6,10 +6,10 @@ import { Category } from '../model/categori.model';
 import { Catalog } from '../model/catalog';
 import { Accessory } from '../model/accessory.model';
 
-// Tạo một DataSource mới với thông tin kết nối MongoDB
+// Tạo một DataSource mới với thông tin kết nối MongoDB 
 const AppDataSource = new DataSource({
     type: "mongodb",
-    url: process.env.MONGO_URI || "mongodb://ptt:password123@172.16.3.10/ptt",  // URL kết nối MongoDB
+    url: process.env.MONGO_URI || "mongodb://ptt:123zXc_-@192.168.1.211:27017/ptt",  // URL kết nối MongoDB
     synchronize: true,  // Tự động đồng bộ hóa với các thay đổi entity
     logging: true,      // Kích hoạt logging trong quá trình thực thi
     entities: [Admin, Product, Blog, Category, Catalog,Accessory] ,  // Các entity bạn đã định nghĩa
