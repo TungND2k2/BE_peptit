@@ -12,6 +12,16 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.json());
 
+// Health check endpoint
+app.get('/', (req, res) => {
+    res.json({
+        status: 'success',
+        message: 'Peptit Elegance API is running',
+        timestamp: new Date().toISOString(),
+        version: '1.0.0'
+    });
+});
+
 // Routes
 app.use("", routes);
 
