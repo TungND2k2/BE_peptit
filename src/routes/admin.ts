@@ -7,6 +7,6 @@ const routerAdmin = Router();
 
 routerAdmin.post("/login", adminController.login);
 
-routerAdmin.post("/", adminController.creatAdmin);
+routerAdmin.post("/", adminController.requireAdminUnlessFirst, adminController.creatAdmin);
 
 export default routerAdmin;

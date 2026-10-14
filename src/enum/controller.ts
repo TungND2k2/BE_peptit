@@ -6,4 +6,5 @@ export enum Controller {
     Catalog = "catalogs",
     Accessory = "accessories",
     Testimonial = "testimonials",
+    Media = "media",
 }

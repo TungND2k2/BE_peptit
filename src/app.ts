@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import routes from './routes';
 import cors from "cors";
+import AppDataSource from './config/data-source';
 
 dotenv.config();
 
@@ -20,6 +21,12 @@ app.get('/', (req, res) => {
         timestamp: new Date().toISOString(),
         version: '1.0.0'
     });
+});
+
+// Liveness/readiness probe: 503 until the DB connection is up
+app.get('/health', (req, res) => {
+    const dbReady = AppDataSource.isInitialized;
+    res.status(dbReady ? 200 : 503).json({ status: dbReady ? 'ok' : 'starting', db: dbReady });
 });
 
 // Routes

@@ -17,8 +17,9 @@ const create = async (req: any, res: Response) => {
         product.title = body.title;
         product.idCategory = body.idCategory;
         product.description = body.description;
-        product.stock = handler.stock;
-        product.price = handler.price;
+        product.stock = body.stock;
+        product.price = body.price;
+        product.images = body.images || [];
         product.owner = handler.id;
         const createBlogResult = await productRepository.save(product);
         return sendResponse(res, 200, createBlogResult)

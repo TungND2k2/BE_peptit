@@ -7,6 +7,7 @@ import routerCategory from './category';
 import routerCatalog from './catalog';
 import routerAccessory from './accessory';
 import routerTestimonial from './testimonial';
+import routerMedia from './media';
 
 const router = Router();
 
@@ -17,4 +18,5 @@ router.use(`/${Controller.Category}`, routerCategory);
 router.use(`/${Controller.Catalog}`, routerCatalog);
 router.use(`/${Controller.Accessory}`, routerAccessory);
 router.use(`/${Controller.Testimonial}`, routerTestimonial);
+router.use(`/${Controller.Media}`, routerMedia);
 export default router;

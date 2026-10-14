@@ -16,7 +16,8 @@ const create = async (req: any, res: Response) => {
         catalog.name = body.name;
         catalog.title = body.title;
         catalog.description = body.description;
-        catalog.price = handler.price;
+        catalog.price = body.price;
+        catalog.stock = body.stock;
         catalog.owner = handler.id;
         const createCatalogResult = await catalogRepository.save(catalog);
         return sendResponse(res, 200, createCatalogResult)

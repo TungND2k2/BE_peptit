@@ -16,6 +16,7 @@ const create = async (req: any, res: Response) => {
         accessory.title = body.title;
         accessory.description = body.description;
         accessory.price = body.price;
+        accessory.stock = body.stock;
         accessory.type = body.type; // Loại phụ kiện: Buttons, Thread, Lace
         accessory.material = body.material || null; // Có thể null
         accessory.color = body.color || null; // Có thể null
