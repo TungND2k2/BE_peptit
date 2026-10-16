@@ -57,21 +57,67 @@ const create = async (req: Request, res: Response) => {
     }
 };
 
-// Admin report: clicks in the last `days` days, newest first
+const sinceDays = (req: Request) => {
+    const days = Math.min(Math.max(Number(req.query.days) || 30, 1), 365);
+    return new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+};
+
+// Admin report: one page of clicks in the last `days` days, newest first
 const findMany = async (req: Request, res: Response) => {
     try {
-        const days = Math.min(Math.max(Number(req.query.days) || 30, 1), 365);
-        const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
-        const clicks = await chatClickRepository.find({
-            where: { createdAt: { $gte: since } } as any,
+        const page = Math.max(Math.floor(Number(req.query.page)) || 1, 1);
+        const pageSize = Math.min(Math.max(Math.floor(Number(req.query.pageSize)) || 20, 1), 100);
+        const [items, total] = await chatClickRepository.findAndCount({
+            where: { createdAt: { $gte: sinceDays(req) } } as any,
             order: { createdAt: -1 } as any,
-            take: 2000,
+            skip: (page - 1) * pageSize,
+            take: pageSize,
         });
-        return sendResponse(res, 200, clicks);
+        return sendResponse(res, 200, { items, total, page, pageSize });
     } catch (error) {
         console.log(error);
         return sendResponse(res, 500, "System Error");
     }
 };
 
-export default { rateLimit, create, findMany };
+// Admin report: totals and top lists over every click in the range (not just one page)
+const summary = async (req: Request, res: Response) => {
+    try {
+        const top = (key: unknown) => [
+            { $group: { _id: key, count: { $sum: 1 } } },
+            { $sort: { count: -1 } },
+            { $limit: 5 },
+        ];
+        const [result] = await AppDataSource.mongoManager
+            .aggregate(ChatClick, [
+                { $match: { createdAt: { $gte: sinceDays(req) } } },
+                {
+                    $facet: {
+                        channels: [{ $group: { _id: '$channel', count: { $sum: 1 } } }],
+                        mobile: [{ $match: { device: 'mobile' } }, { $count: 'count' }],
+                        topPages: top({ $ifNull: ['$item', '$page'] }),
+                        topSources: top({ $ifNull: ['$referrer', null] }),
+                    },
+                },
+            ])
+            .toArray();
+
+        const byChannel = Object.fromEntries(result.channels.map((c: any) => [c._id, c.count]));
+        const whatsapp = byChannel[ChatChannel.WHATSAPP] || 0;
+        const messenger = byChannel[ChatChannel.MESSENGER] || 0;
+        const toRows = (rows: any[]) => rows.map((r) => ({ label: r._id, count: r.count }));
+        return sendResponse(res, 200, {
+            total: whatsapp + messenger,
+            whatsapp,
+            messenger,
+            mobile: result.mobile[0]?.count || 0,
+            topPages: toRows(result.topPages),
+            topSources: toRows(result.topSources),
+        });
+    } catch (error) {
+        console.log(error);
+        return sendResponse(res, 500, "System Error");
+    }
+};
+
+export default { rateLimit, create, findMany, summary };

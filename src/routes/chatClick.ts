@@ -6,5 +6,6 @@ const routerChatClick = Router();
 
 routerChatClick.post("/", chatClickController.rateLimit, chatClickController.create);
 routerChatClick.get("/", authenticateJWT, chatClickController.findMany);
+routerChatClick.get("/summary", authenticateJWT, chatClickController.summary);
 
 export default routerChatClick;
