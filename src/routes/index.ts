@@ -8,6 +8,7 @@ import routerCatalog from './catalog';
 import routerAccessory from './accessory';
 import routerTestimonial from './testimonial';
 import routerMedia from './media';
+import routerChatClick from './chatClick';
 
 const router = Router();
 
@@ -19,4 +20,5 @@ router.use(`/${Controller.Catalog}`, routerCatalog);
 router.use(`/${Controller.Accessory}`, routerAccessory);
 router.use(`/${Controller.Testimonial}`, routerTestimonial);
 router.use(`/${Controller.Media}`, routerMedia);
+router.use(`/${Controller.ChatClick}`, routerChatClick);
 export default router;

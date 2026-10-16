@@ -7,6 +7,8 @@ import AppDataSource from './config/data-source';
 dotenv.config();
 
 const app = express();
+// Behind one reverse proxy (Traefik); makes req.ip the client address
+app.set('trust proxy', 1);
 app.use(cors());
 
 // Middleware

@@ -9,6 +9,7 @@ import { Catalog } from '../model/catalog';
 import { Accessory } from '../model/accessory.model';
 import { Testimonial } from '../model/testimonial.model';
 import { Media } from '../model/media.model';
+import { ChatClick } from '../model/chatClick.model';
 
 if (!process.env.MONGO_URI) {
     throw new Error('MONGO_URI is not set. Copy .env.example to .env and fill it in.');
@@ -20,7 +21,7 @@ const AppDataSource = new DataSource({
     url: process.env.MONGO_URI,  // URL kết nối MongoDB
     synchronize: true,  // Tự động đồng bộ hóa với các thay đổi entity
     logging: true,      // Kích hoạt logging trong quá trình thực thi
-    entities: [Admin, Product, Blog, Category, Catalog, Accessory, Testimonial, Media] ,  // Các entity bạn đã định nghĩa
+    entities: [Admin, Product, Blog, Category, Catalog, Accessory, Testimonial, Media, ChatClick] ,  // Các entity bạn đã định nghĩa
     useNewUrlParser: true,   // Được hỗ trợ trong TypeORM, nhưng không bắt buộc trong các phiên bản mới của Mongoose
     useUnifiedTopology: true, // Được hỗ trợ trong TypeORM, nhưng không bắt buộc trong các phiên bản mới của Mongoose
 });

@@ -7,4 +7,5 @@ export enum Controller {
     Accessory = "accessories",
     Testimonial = "testimonials",
     Media = "media",
+    ChatClick = "chat-clicks",
 }
